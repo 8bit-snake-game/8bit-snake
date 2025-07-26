@@ -308,8 +308,8 @@
     text-shadow: 0 0 4px #0ff;
     cursor: pointer;
   ">
-    🔊
-  </button>
+    🔇
+  </button> 
 
   <script>
     let isPaused = false;
@@ -345,14 +345,14 @@
       if (!musicPlaying) {
         menuMusic.play().then(() => {
           musicPlaying = true;
-          document.getElementById("toggleMusicBtn").innerText = "🔇";
+          document.getElementById("toggleMusicBtn").innerText = "🔊";
         }).catch(err => {
           console.warn("Autoplay blocked:", err);
         });
       } else {
         menuMusic.pause();
         musicPlaying = false;
-        document.getElementById("toggleMusicBtn").innerText = "🔊";
+        document.getElementById("toggleMusicBtn").innerText = "🔇";
       }
     }
 
@@ -497,7 +497,7 @@
       if (musicPlaying) {
         menuMusic.pause();
         musicPlaying = false;
-        document.getElementById("toggleMusicBtn").innerText = "🔊";
+        document.getElementById("toggleMusicBtn").innerText = "🔇";
       }
 
       if (/Mobi|Android/i.test(navigator.userAgent)) {
