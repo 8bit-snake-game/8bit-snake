@@ -472,15 +472,6 @@
       gameState = 'skin-select';
       document.getElementById("mainMenu").style.display = "none";
       document.getElementById("skinSelector").style.display = "block";
-
-      if (!musicPlaying) {
-        menuMusic.play().then(() => {
-          musicPlaying = true;
-          document.getElementById("toggleMusicBtn").innerText = "🔇";
-        }).catch(err => {
-          console.warn("Autoplay was blocked:", err);
-        });
-      }
     }
 
     function setSkin(el, skin) {
