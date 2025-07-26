@@ -325,6 +325,7 @@
     let ghostTimer = 0;
     let ghostTimeout = null;
     let ghostBlinkInterval = null;
+    let slowBlinkInterval = null;
     const obstacles = [];
 
     const eatSound = new Audio("sounds/eat.mp3");
@@ -913,18 +914,34 @@
       const originalSpeed = speed;
       speed += 70;
       powerupTimer = 5;
+      
       const display = document.getElementById("powerupTimerDisplay");
       display.style.display = "block";
       display.textContent = `Power-Up: ${powerupTimer}`;
 
+      const canvas = document.getElementById("game");
+      let blink = false;
+      slowBlinkInterval = setInterval(() => {
+        blink = !blink;
+        const color = blink ? "#ffff00" : "#ffffff";
+        canvas.style.borderColor = color;
+        canvas.style.boxShadow = `0 0 20px ${color}`;
+      }, 300);
+
       powerupTimeout = setInterval(() => {
         powerupTimer--;
         display.textContent = `Power-Up: ${powerupTimer}`;
+        
         if (powerupTimer <= 0) {
           clearInterval(powerupTimeout);
           speed = originalSpeed;
           powerupActive = false;
           display.style.display = "none";
+
+          clearInterval(slowBlinkInterval);
+          slowBlinkInterval = null;
+          canvas.style.borderColor = "#0ff";
+          canvas.style.boxShadow = "0 0 20px #0ff";
         }
       }, 1000);
     }
